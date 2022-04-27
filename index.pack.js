@@ -165,7 +165,7 @@ function enterForest(){
 }
 
 function walk(){
-    if(encounters < 4){
+    if(encounters < 3){
         heroLocation = "Zolgozd"
     }else{
         heroLocation = "The Heart of Zolgozd"
