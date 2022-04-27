@@ -260,9 +260,15 @@ function attack(){
                     if (heroCrit === 1){
                         herosAttack = 'land a critical attack and deal ' + (heroAtk *3) + ` points of damage. The `
                         foeHP = foeHP - (heroAtk * 3)
+                        if(foeHP < 0){
+                            foeHP = 0
+                        }
                     }else{
                         herosAttack = 'attack the ' + foeName + ` and deal ` + heroAtk + ` points of damage. The `
                         foeHP = foeHP - heroAtk
+                        if(foeHP < 0){
+                            foeHP = 0
+                        }
                 }
                 }else{
                     herosAttack = `miss the ` + foeName + ` and deal no damage. The `
@@ -283,7 +289,7 @@ function attack(){
                     if(foeHP > 0){
                         engage = prompt(`You ` + herosAttack + foeName + foesAttack + `Your current HP is ` + hero.hp + ` and the ` + foeName + `'s current HP is ` + foeHP + `. (a) Attack again or (r)Run?`)
                     }else{
-                        confirm('You have defeated the ' + foeName)
+                        confirm(`You ` + herosAttack + foeName + foesAttack + `Your current HP is ` + hero.hp + ` and the ` + foeName + `'s current HP is ` + foeHP + `. You have defeated the ` + foeName)
                         engage = ''
                     }
             }else{ 
