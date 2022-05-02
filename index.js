@@ -213,14 +213,6 @@ function durex(){
     readline.keyInPause(newItem + `'Durex: Not quite a magnum sized shield, it fits in one hand leaving the other free to use as desired. Studded with various elven gems, this shield is sure to help you defend against the Zolgozd'z strongest STDs (sinisterly terrifying denizens) `)
     inventory.push("Durex")
 }
-function spiderVenom(){
-    hero.atk = hero.atk + 5
-}
-function picklePower(){
-    hero.hp = hero.hp + 50
-}
-
-
 
 function printHero(){
     console.clear()
@@ -232,16 +224,13 @@ function enterForest(){
     readline.keyInPause(`You walk through the vail between the village and Zolgozd and are instantly overcome by an intense dark chill. Visibility is extremely low and you pull the Light Rune from your pack.  It doesn't help much but it allows you to see the path laid before you. you cant help but feel that this forest is not ok with your presence.`)
 }
 
+while (hero.hp > 0 && defeated !== true){
+    console.clear()
+    walk()
+}
+
 function walk(){
     console.clear()
-    if(encounters < 3){
-        heroLocation = "Zolgozd"
-    }else{
-        heroLocation = "The Heart of Zolgozd"
-    }
-    if (encounters === 3 && said !== true){
-        theCaves()
-    }
     let chance = Math.floor((Math.random()*3)+1)
     switch(chance){
         case 1:
@@ -251,13 +240,14 @@ function walk(){
             uneventful()
         break;  
     }
-}
-
-function theCaves(){
-    console.clear()
-    heroLocation = "The Heart of Zolgozd"
-    said = true
-    readline.keyInPause(`The journey through Zolgozd was arduous to say the least, but now you approach the entrance to the caves. You fear the worst is yet come. Theres a stench eminating from the cave that you can't quite put your finger on; peppery and vile. You've made it this far, no turning back now!`)
+    if(encounters < 3){
+        heroLocation = "Zolgozd"
+    }else{
+        heroLocation = "The Heart of Zolgozd"
+    }
+    if (encounters === 3 && said !== true){
+        theCaves()
+    }
 }
 
 function uneventful(){
@@ -289,6 +279,13 @@ function encounter(){
         choice()
     }
 }}
+
+function theCaves(){
+    console.clear()
+    heroLocation = "The Heart of Zolgozd"
+    said = true
+    readline.keyInPause(`The journey through Zolgozd was arduous to say the least, but now you approach the entrance to the caves. You fear the worst is yet come. Theres a stench eminating from the cave that you can't quite put your finger on; peppery and vile. You've made it this far, no turning back now!`)
+}
 
 function choice(){
     console.clear()
@@ -412,7 +409,7 @@ function itemDrop(){
         venomAcquired = true
         inventory.push(foeItem)
         readline.keyInPause(newItem + foeItem + ": " + foeItemDescription)
-    }if(foeName === 'pickle'){
+    }else if(foeName === 'pickle'){
         picklePower()
         inventory.push(foeItem)
         readline.keyInPause(newItem + foeItem + ": " + foeItemDescription)
@@ -420,6 +417,13 @@ function itemDrop(){
         inventory.push(foeItem)
         readline.keyInPause(newItem + foeItem + ": " + foeItemDescription)
     }
+}
+
+function spiderVenom(){
+    hero.atk = hero.atk + 5
+}
+function picklePower(){
+    hero.hp = hero.hp + 50
 }
 
 function dragon(){
@@ -449,7 +453,3 @@ function victory(){
     process.exit()
 }
 
-while (hero.hp > 0 && defeated !== true){
-    console.clear()
-    walk()
-}
